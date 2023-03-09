@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>  
+   
+</head>
+<style>
+    
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html, body #fullheight{
+    background-color: black;
+}
+.container{
+    height: 100%;
+    background-color: black;
+}
+.result{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    color: white;
+    height: 39%;
+}
+.result span{
+    margin-right: 10px;
+    justify-self: flex-end;
+    font-size: 100px; 
+}
+
+
+.buttons1{
+    width: 100%;
+    height: 60%;
+    font-size: 30px;
+    background-color: black;
+    display: grid;
+    margin-bottom: 1%;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.buttons2{
+    width: 100%;
+    height: 60%;
+    font-size: 30px;
+    background-color: black;
+    display: grid;
+    margin-bottom: 1%;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.buttons3{
+    width: 100%;
+    height: 60%;
+    font-size: 30px;
+    background-color: black;
+    display: grid;
+    margin-bottom: 1%;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.buttons4{
+    width: 100%;
+    height: 60%;
+    font-size: 30px;
+    background-color: black;
+    display: grid;
+    margin-bottom: 1%;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+.buttons5{
+    width: 100%;
+    height: 60%;
+    font-size: 30px;
+    background-color: black;
+    display: grid;
+    margin-bottom: 1%;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.buttons1 > button:hover{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.buttons2 > button:hover{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.buttons3 > button:hover{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.buttons4 > button:hover{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+.buttons5 > button:hover{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+
+.numbers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100%;
+    color: white;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+    cursor: pointer;
+    align-self: baseline;
+    justify-self: center;
+    background-color: grey;
+    border: none;
+    margin-bottom: 5%;
+}
+
+
+.AC{
+    background-color: orange;
+    border: none;
+}
+.DEL{
+    background-color: orange;
+    border: none;
+}
+
+
+</style>
+<body>
+
+    <div class="container">
+
+        <div id="ans" class = "result"> <span>0</span></div>
+
+        <div class = "buttons1">
+
+        <button id="btn_AC" class="numbers AC">AC</button>
+        <button id="btn_delete" class="numbers DEL">DEL</button>
+        <button id="btn_+/-" class="numbers">+/-</button>
+        <button id="btn_%" class="numbers">%</button>
+
+   
+    
+        </div>
+        
+        <div class = "buttons2">
+
+            <button id="btn_7" class="numbers">7</button>
+            <button id="btn_8" class="numbers">8</button>
+            <button id="btn_9" class="numbers">9</button>
+            <button id="btn_÷" class="numbers">÷</button>
+        
+        </div>
+
+        <div class = "buttons3">
+
+            <button id="btn_4" class="numbers">4</button>
+            <button id="btn_5" class="numbers">5</button>
+            <button id="btn_6" class="numbers">6</button>
+            <button id="btn_x" class="numbers">x</button>
+        
+    </div>
+
+    <div class = "buttons4">
+
+        <button id="btn_1" class="numbers">1</button>
+        <button id="btn_2" class="numbers">2</button>
+        <button id="btn_3" class="numbers">3</button>
+        <button id="btn_-" class="numbers">-</button>
+        
+    </div>
+
+    <div class = "buttons5">
+
+        <button id="btn_0" class="numbers">0</button>
+        <button id="btn_." class="numbers">.</button>
+        <button id="btn_=" class="numbers">=</button>
+        <button id="btn_+" class="numbers">+</button>
+        
+    </div>
+
+</div>
+
+    <script>   
+ 
+        let ans = "";
+        let first = 0;
+        let second = 0;
+        let total = 0;
+        let num = 0;
+        let sign = 'none';
+        let g = 0;
+
+        const btn_AC = document.getElementById("btn_AC")
+        const btn_0 = document.getElementById("btn_0")
+        const btn_1 = document.getElementById("btn_1")
+        const btn_2 = document.getElementById("btn_2")
+        const btn_3 = document.getElementById("btn_3")
+        const btn_4 = document.getElementById("btn_4")
+        const btn_5 = document.getElementById("btn_5")
+        const btn_6 = document.getElementById("btn_6")
+        const btn_7 = document.getElementById("btn_7")
+        const btn_8 = document.getElementById("btn_8")
+        const btn_9 = document.getElementById("btn_9")
+        const btn_plus = document.getElementById("btn_+")
+        const btn_minus = document.getElementById("btn_-")
+        const btn_multiply = document.getElementById("btn_x")
+        const btn_divide = document.getElementById("btn_÷")
+        const btn_equal = document.getElementById("btn_=")
+        const btn_dot = document.getElementById("btn_.")
+        const btn_percent = document.getElementById("btn_%")
+        const btn_negative = document.getElementById("btn_+/-")
+        const btn_delete = document.getElementById("btn_delete")
+
+
+        btn_AC.addEventListener("click", function(e) {
+        ans = "";
+        sign = "none";
+        total = 0;
+        first = 0;
+        second = 0;
+        g = 0;
+        document.querySelector(".result span").innerHTML = 0;
+        });
+
+        btn_0.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+
+        ans = ans + '0';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_1.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+
+        ans = ans + '1';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }     
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_2.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+        ans = ans + '2';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_3.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+        ans = ans + '3';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_4.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+        ans = ans + '4';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_5.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+        ans = ans + '5';
+        
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }   
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_6.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+        ans = ans + '6';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_7.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+        ans = ans + '7';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_8.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+        ans = ans + '8';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+        });
+
+        btn_9.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+        ans = ans + '9';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+
+        });
+
+        btn_plus.addEventListener("click", function(e) {
+        if(g === 1){
+            first = total;
+            g = 0;
+            ans = "";
+        }else{
+            ans = "";
+        }
+
+        sign = "plus";
+        document.querySelector(".result span").innerHTML = 0;
+
+        });
+
+        btn_minus.addEventListener("click", function(e) {
+        if(g === 1){
+            first = total;
+            g = 0;
+            ans = "";
+        }else{
+            ans = "";
+        }
+
+        sign = "minus";
+        document.querySelector(".result span").innerHTML = 0;
+
+        });
+
+        btn_multiply.addEventListener("click", function(e) {
+        if(g === 1){
+            first = total;
+            g = 0;
+            ans = "";
+        }else{
+            ans = "";
+        }
+
+        sign = "multiply";
+        document.querySelector(".result span").innerHTML = 0;
+
+        });
+
+        btn_divide.addEventListener("click", function(e) {
+        if(g === 1){
+            first = total;
+            g = 0;
+            ans = "";
+        }else{
+            ans = "";
+        }
+        sign = "divide";
+        document.querySelector(".result span").innerHTML = 0;
+
+        });
+
+        btn_dot.addEventListener("click", function(e) {
+        if(g === 1){
+            ans = "";
+            g = 0;
+            sign = "none";
+        }
+
+        ans = ans + '.';
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+
+        });
+
+        btn_negative.addEventListener("click", function(e) {
+        if(g === 1){
+            first = total*-1;
+            g = 0;
+            num = parseFloat(ans);
+            num = num*-1;
+            ans = num.toString();
+        }else{
+            num = parseFloat(ans);
+            num = num*-1;
+            ans = num.toString();
+        }
+     
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+
+        });
+
+        btn_percent.addEventListener("click", function(e) {
+        if(g === 1){
+            first = total;
+            g = 0;
+            num = parseFloat(ans);
+            num = num/100;
+            ans = num.toString();
+        }else{
+            num = parseFloat(ans);
+            num = num/100;
+            ans = num.toString();
+        }
+
+
+        if(sign === "none"){
+            first = parseFloat(ans);
+        }else{
+            second = parseFloat(ans);
+        }
+
+        document.querySelector(".result span").innerHTML = ans;
+
+        });
+
+        btn_delete.addEventListener("click", function(e) {
+        if(g === 1){
+            g = 0;
+            ans = ans.substring(0, ans.length - 1)
+            first = parseFloat(ans);
+        }else{
+            ans = ans.substring(0, ans.length - 1)
+        }
+
+        if(ans === ""){
+            document.querySelector(".result span").innerHTML = 0;
+        }else{
+            document.querySelector(".result span").innerHTML = ans;
+        }
+        });
+
+        btn_equal.addEventListener("click", function(e) {
+        if(sign === "plus"){
+            total = first + second;
+        }
+
+        if(sign === "minus"){
+            total = first - second;
+        }
+
+        if(sign === "multiply"){
+            total = first * second;
+        }
+
+        if(sign === "divide"){
+            total = first / second;
+        }
+
+        if(sign === "divide" && second === 0){
+            ans = "";
+            document.querySelector(".result span").innerHTML = "Error";
+        }
+
+        else if(sign === "none" && ans === ""){
+            document.querySelector(".result span").innerHTML = 0;
+        }
+       else if(sign === "none" && ans != ""){
+            document.querySelector(".result span").innerHTML = ans;
+        }else{
+        ans = total.toString();
+        g = 1;
+        sign = "none";
+        document.querySelector(".result span").innerHTML = ans;
+        }
+
+        });
+
+       
+
+    </script>
+
+    
+</body>
+</html>
